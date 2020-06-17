@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_chat/models/user_data.dart';
 import 'package:firebase_chat/services/auth_service.dart';
+import 'package:firebase_chat/services/database_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +17,10 @@ void main() {
         ),
         Provider<AuthService>(
           create: (_) => AuthService(),
-        )
+        ),
+        Provider<DatabaseService>(
+          create: (_) => DatabaseService(),
+        ),
       ],
       child: MyApp(),
     )
