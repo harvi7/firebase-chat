@@ -1,15 +1,16 @@
 import 'package:firebase_chat/models/user_data.dart';
 import 'package:firebase_chat/models/user_model.dart';
+import 'package:firebase_chat/screens/create_chat_screen.dart';
 import 'package:firebase_chat/services/database_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SearchUserScreen extends StatefulWidget {
+class SearchUsersScreen extends StatefulWidget {
   @override
-  _SearchUserScreenState createState() => _SearchUserScreenState();
+  _SearchUsersScreenState createState() => _SearchUsersScreenState();
 }
 
-class _SearchUserScreenState extends State<SearchUserScreen> {
+class _SearchUsersScreenState extends State<SearchUsersScreen> {
   final TextEditingController _searchController = TextEditingController();
   List<User> _users = [];
   List<User> _selectedUsers = [];
@@ -19,7 +20,7 @@ class _SearchUserScreenState extends State<SearchUserScreen> {
         .addPostFrameCallback((_) => _searchController.clear());
     setState(() => _users = []);
   }
-  
+
   @override
   Widget build(BuildContext context) {
     final currentUserId =
@@ -31,7 +32,16 @@ class _SearchUserScreenState extends State<SearchUserScreen> {
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              
+              if (_selectedUsers.length > 0) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => CreateChatScreen(
+                      selectedUsers: _selectedUsers,
+                    ),
+                  ),
+                );
+              }
             },
           ),
         ],
@@ -95,7 +105,6 @@ class _SearchUserScreenState extends State<SearchUserScreen> {
               },
             ),
           ),
-
         ],
       ),
     );
