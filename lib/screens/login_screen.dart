@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
             Text(
               'Welcome!',
               style: TextStyle(
@@ -136,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 10.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
+              children: <Widget>[
                 Container(
                   width: 150.0,
                   child: FlatButton(
@@ -154,7 +154,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () => setState(() => _selectedIndex = 0),
                   ),
                 ),
-
                 Container(
                   width: 150.0,
                   child: FlatButton(
@@ -163,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     color: _selectedIndex == 1 ? Colors.blue : Colors.grey[300],
                     child: Text(
-                      'Sign up',
+                      'Sign Up',
                       style: TextStyle(
                         fontSize: 20.0,
                         color: _selectedIndex == 1 ? Colors.white : Colors.blue,
@@ -171,12 +170,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     onPressed: () => setState(() => _selectedIndex = 1),
                   ),
-                )
+                ),
               ],
             ),
             _selectedIndex == 0 ? _buildLoginForm() : _buildSignupForm(),
             const SizedBox(height: 20.0),
-            Container (
+            Container(
               width: 180.0,
               child: FlatButton(
                 shape: RoundedRectangleBorder(
@@ -184,7 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 color: Colors.blue,
                 child: Text(
-                  'Sumbit',
+                  'Submit',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20.0,
@@ -192,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 onPressed: _submit,
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -9,8 +9,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class CreateChatScreen extends StatefulWidget {
-
   final List<User> selectedUsers;
+
   const CreateChatScreen({this.selectedUsers});
 
   @override

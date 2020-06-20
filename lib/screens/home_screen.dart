@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_chat/models/chat_model.dart';
 import 'package:firebase_chat/models/user_data.dart';
-// import 'package:firebase_chat/screens/chat_screen.dart';
+import 'package:firebase_chat/screens/chat_screen.dart';
 import 'package:firebase_chat/screens/search_users_screen.dart';
 import 'package:firebase_chat/services/auth_service.dart';
 import 'package:firebase_chat/utilities/constants.dart';
@@ -16,6 +16,34 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
+  @override
+  void initState() {
+    super.initState();
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) {
+        print('On message: $message');
+      },
+      onResume: (Map<String, dynamic> message) {
+        print('On resume: $message');
+      },
+      onLaunch: (Map<String, dynamic> message) {
+        print('On launch: $message');
+      },
+    );
+    _firebaseMessaging.requestNotificationPermissions(
+      const IosNotificationSettings(
+        sound: true,
+        badge: true,
+        alert: true,
+      ),
+    );
+    _firebaseMessaging.onIosSettingsRegistered.listen((settings) {
+      print('Settings registered: $settings');
+    });
+    Provider.of<AuthService>(context, listen: false).updateToken();
+  }
 
   _buildChat(Chat chat, String currentUserId) {
     final bool isRead = chat.readStatus[currentUserId];
